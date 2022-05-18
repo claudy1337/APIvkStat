@@ -32,15 +32,52 @@
                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                            material:HintAssist.Hint="idUser"
                            Cursor="Arrow"/>
+                <Expander
+                        Width="362"
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Stretch"
+                        Header="Information">
+                    <StackPanel
+                        Orientation="Vertical"
+                        TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                        Margin="24,8,24,16">
+                        <TextBlock Text="lists - краткая информ.
+                                   is_no_index - индекс на др стр.
+                                   can_be_invited_group - инвайт груп.
+                                   last_seen - Время посещения.
+                                   private_message -  закрытое лс.
+                                   personal - жизненая позиция.
+                                   ------------------------------------
+                                   1- мобильная версия
+                                   2- приложение для iPhone
+                                   3- приложение для iPad
+                                   4- приложение для Android
+                                   5- приложение для Windows Phone
+                                   6- приложение для Windows 10
+                                   7- полная версия сайта
+                                   ------------------------------------" FontFamily="Cascadia Code" TextWrapping="Wrap" Width="318" FontSize="15"/>
 
+                    </StackPanel>
+                </Expander>
                 <Button x:Name="GetUser"
                         Click="GetUser_Click"
                         Height="40"
                         Content="SHOW"
                         FontSize="20"
+                        Margin="0,25,0,0"
                         FontFamily="Cascadia Code" Cursor="Hand"
                         Background="#EB8F4C"
-                        Margin="30"/>
+                        Width="300"/>
+                
+                <Button x:Name="savefile"
+                        Click="savefile_Click"
+                        Background="#EB8F4C"
+                        Width="300"
+                        Height="40"
+                        Margin="0,25,0,0"
+                        Content="SAVE"
+                        FontSize="20"
+                        FontFamily="Cascadia Code" Cursor="Hand"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical">
                 <TextBox x:Name="txtResponce"

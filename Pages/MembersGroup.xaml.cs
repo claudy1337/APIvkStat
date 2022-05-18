@@ -32,35 +32,37 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace UIKitTutorials.Pages
 {
     /// <summary>
-    /// Lógica de interacción para PaymentPage.xaml
+    /// Lógica de interacción para HomePage.xaml
     /// </summary>
-    public partial class PaymentPage : Page
+    public partial class HomePage : Page
     {
-        public PaymentPage()
+        public HomePage()
         {
             InitializeComponent();
+
         }
-        public String Content
+        public String ResponceContent
         {
             get { return (String)GetValue(ResponceContentProperty); }
             set { SetValue(ResponceContentProperty, value); }
         }
         public static readonly DependencyProperty ResponceContentProperty =
-            DependencyProperty.Register("Content", typeof(String), typeof(MainWindow));
+            DependencyProperty.Register("ResponceContent", typeof(String), typeof(MainWindow));
 
 
         public ObservableCollection<VKGroupMember> Members { get; set; }
             = new ObservableCollection<VKGroupMember>();
+
         private async void GetUser_Click(object sender, RoutedEventArgs e)
         {
-            Content = "....";
-            var result = await Utility.FetchUserInfo(txtUserId.Text);
-            Content = Utility.PrettyJson(result.Content);
-            txtResponce.Text = Content;
+            ResponceContent = "....";
+            var result = await Utility.FetchMembersInfo(txtUserId.Text, "100");
+            ResponceContent = Utility.PrettyJson(result.rawContent);
+            txtResponce.Text = ResponceContent;
             Members.Clear();
 
-            var usr = JsonConvert.DeserializeObject<Users.Items>(txtResponce.Text);
-            
+            var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
+            usrList.ItemsSource = usr.response.items;
         }
     }
 }

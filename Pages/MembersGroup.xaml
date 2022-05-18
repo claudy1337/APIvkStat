@@ -1,0 +1,231 @@
+﻿<Page x:Class="UIKitTutorials.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UIKitTutorials.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="105"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBox   x:Name="txtUserId"
+                           Text="uqweed"
+                           FontSize="15"
+                           Margin="30"
+                           FontFamily="Cascadia Code"
+                           Style="{StaticResource MaterialDesignFilledTextBox}"
+                           TextWrapping="Wrap"
+                           MaxLength="25"
+                           material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           material:HintAssist.Hint="idUser"
+                           Cursor="Arrow" Width="250" Height="55"/>
+
+                <Button x:Name="GetUser"
+                        Click="GetUser_Click"
+                        Height="40"
+                        Content="SHOW"
+                        FontSize="20"
+                        Margin="10,0,0,0"
+                        
+                        FontFamily="Cascadia Code" Cursor="Hand"
+                        Background="#EB8F4C"
+                        Width="210"/>
+                <TextBox x:Name="txtResponce" 
+                     AcceptsReturn="True" 
+                     TextWrapping="Wrap" 
+                     Text="{Binding ElementName=this, Path=ResponceContent}" Cursor="Arrow"/>
+            </StackPanel>
+            <ListView Grid.Row="1" x:Name="usrList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        
+                    
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding photo_100}" Height="300" Width="250" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Border/>
+                            <Expander
+                                            Width="auto"
+                                            Height="250"
+                                            ExpandDirection="Right">
+                                <Expander.Header>
+                                    <TextBlock
+                                                    Text="Information"
+                                                    FontSize="22"
+                                                    RenderTransformOrigin=".5,.5">
+                                        <TextBlock.LayoutTransform>
+                                            <RotateTransform
+                                                            Angle="90" />
+                                        </TextBlock.LayoutTransform>
+                                    </TextBlock>
+
+                                </Expander.Header>
+
+                                <StackPanel
+                                                Orientation="Vertical"
+                                                TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                                Margin="8,24,16,24">
+
+                                    <TextBox
+                                            Text="{Binding first_name}"
+                                            x:Name="TBName"
+                                            Margin="0,20,0,0"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            VerticalAlignment="Top"
+                                            TextWrapping="Wrap"
+                                            Width="150"
+                                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            material:HintAssist.Hint="Name"
+                                            FontFamily="Ubuntu Light"
+                                            FontSize="15"/>
+
+                                    <TextBox
+                                            Text="{Binding last_name}"
+                                            Margin="0,20,0,0"
+                                            x:Name="TBSize"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            VerticalAlignment="Top"
+                                            TextWrapping="Wrap"
+                                            Width="150"
+                                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            material:HintAssist.Hint="Price"
+                                            FontFamily="Ubuntu Light"
+                                            FontSize="15"/>
+
+                                    <TextBox
+                                                     Text="{Binding Category}"
+                                            x:Name="TBMaterial"
+                                            Margin="0,20,0,0"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            VerticalAlignment="Top"
+                                            TextWrapping="Wrap"
+                                            Width="150"
+                                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            material:HintAssist.Hint="Category"
+                                            FontFamily="Ubuntu Light"
+                                            FontSize="15"/>
+                                </StackPanel>
+                            </Expander>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <material:PopupBox
+                                                StaysOpen="True"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                    <Grid Width="200" Margin="8,8,8,8">
+                                        <Grid.Resources>
+                                            <Style TargetType="TextBox"
+                                                                BasedOn="{StaticResource MaterialDesignTextBox}">
+                                                <Setter
+                                                                Property="material:HintAssist.IsFloating"
+                                                                Value="True" />
+                                                <Setter
+                                                                Property="Margin"
+                                                                Value="8,8,8,8" />
+                                            </Style>
+                                        </Grid.Resources>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                        Grid.Row="0"
+                                                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                        Margin="8,8,8,16"
+                                                        Text="Full Information"/>
+
+                                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
+                                            <TextBox
+                                                             Text="{Binding Width}"
+                                                             x:Name="Aboba"
+                                                             Grid.Row="1"
+                                                             Margin="0,20,0,0"
+                                                             Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             VerticalAlignment="Top"
+                                                             TextWrapping="Wrap"
+                                                             Width="150"
+                                                             material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                             material:HintAssist.Hint="Width"
+                                                             FontFamily="Ubuntu Light"
+                                                             FontSize="15"/>
+
+                                            <TextBox
+                                                                    Text="{Binding Height}"
+                                                                    Grid.Row="2"                
+                                                                    Margin="0,20,0,0"
+                                                                    Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                                    VerticalAlignment="Top"
+                                                                    TextWrapping="Wrap"
+                                                                    Width="150"
+                                                                    material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                                    material:HintAssist.Hint="Height"
+                                                                    FontFamily="Ubuntu Light"
+                                                                    FontSize="15"/>
+
+                                            <TextBox
+                                            Text="{Binding Color}"
+                                            Grid.Row="3"                
+                                            Margin="0,20,0,0"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            VerticalAlignment="Top"
+                                            TextWrapping="Wrap"
+                                            Width="150"
+                                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            material:HintAssist.Hint="Color"
+                                            FontFamily="Ubuntu Light"
+                                            FontSize="15"/>
+
+                                            <TextBox                                                              
+                                            Text="{Binding Structure}"
+                                            Grid.Row="4"                
+                                            Margin="0,20,0,0"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            VerticalAlignment="Top"
+                                            TextWrapping="Wrap"
+                                            Width="150"
+                                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            material:HintAssist.Hint="Structure"
+                                            FontFamily="Ubuntu Light"
+                                            FontSize="15"/>
+
+                                            <TextBox
+                                            Text="{Binding Material}"
+                                            Grid.Row="4"                
+                                            Margin="0,20,0,0"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            VerticalAlignment="Top"
+                                            TextWrapping="Wrap"
+                                            Width="150"
+                                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            material:HintAssist.Hint="Material"
+                                            FontFamily="Ubuntu Light"
+                                            FontSize="15"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </material:PopupBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Border>
+</Page>

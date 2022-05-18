@@ -23,7 +23,6 @@ namespace UIKitTutorials.vk
     {
         public String Content { get; set; }
         public T responceUser { get; set; }
-
     }
     public class Utility
     {
@@ -59,7 +58,7 @@ namespace UIKitTutorials.vk
             HttpResponseMessage response = await VKGet("groups.getMembers", new Dictionary<string, string>
             {
                 ["group_id"] = groupId,
-                ["fields"] = "title , exports , last_seen",
+                ["fields"] = "title , exports , last_seen , bdate , can_write_private_message , domain , online , sex , personal , photo_100",
                 ["count"] = count,
                 ["lang"] = "ru"
                 //bdate - дата рождения
@@ -70,9 +69,7 @@ namespace UIKitTutorials.vk
                 //sex - пол, да был)
                 //personal - жизненая позиция 
                 //photo_100
-                // 
             });
-
             var content = await response.Content.ReadAsStringAsync();
             var itemsResponce = JsonSerializer.Deserialize<VKDictResponce<VKItemsResponse<VKGroupMember>>>(content);
             return new Responce<VKDictResponce<VKItemsResponse<VKGroupMember>>>
@@ -87,15 +84,14 @@ namespace UIKitTutorials.vk
             HttpResponseMessage response = await VKGet("users.get", new Dictionary<string, string>
             {
                 ["user_id"] = userId,
-                ["fields"] = "lists , "
+                ["fields"] = "lists , is_no_index , followers_count , counters , can_be_invited_group , has_photo , wall_default , last_seen , bdate , domain , photo_100 , sex"
                 //is_no_index Индексируется ли профиль поисковыми сайтами
                 //followers_count подписчиков
                 //counters - Количество различных объектов у пользователя
-                //can_be_invited_group , 
+                //can_be_invited_group, 
                 //has_photo
                 //wall_default
             });
-
             var content = await response.Content.ReadAsStringAsync();
             var itemsResponce = JsonSerializer.Deserialize<ResponceUser<VKUserResponce<VKGroupMember>>>(content);
             return new ResponceUser<VKUserResponce<VKGroupMember>>

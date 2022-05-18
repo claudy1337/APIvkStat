@@ -29,58 +29,43 @@ using Newtonsoft.Json;
 using System.Reflection;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-
 namespace UIKitTutorials.Pages
 {
     /// <summary>
-    /// Lógica de interacción para NotesPage.xaml
+    /// Lógica de interacción para PaymentPage.xaml
     /// </summary>
-    public partial class NotesPage : Page
+    public partial class PaymentPage : Page
     {
-        public String ResponceContent
+        public PaymentPage()
+        {
+            InitializeComponent();
+        }
+        public String Content
         {
             get { return (String)GetValue(ResponceContentProperty); }
             set { SetValue(ResponceContentProperty, value); }
         }
         public static readonly DependencyProperty ResponceContentProperty =
-            DependencyProperty.Register("ResponceContent", typeof(String), typeof(MainWindow));
+            DependencyProperty.Register("Content", typeof(String), typeof(MainWindow));
+
 
         public ObservableCollection<VKGroupMember> Members { get; set; }
             = new ObservableCollection<VKGroupMember>();
-        public NotesPage()
+        private async void GetUser_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-        }
-
-        private async void getUser_Click(object sender, RoutedEventArgs e)
-        {
-            ResponceContent = "....";
-            var result = await Utility.FetchMembersInfo(txtGroupId.Text, "100");
-            ResponceContent = Utility.PrettyJson(result.rawContent);
-            txtResponce.Text = ResponceContent;
+            Content = "....";
+            var result = await Utility.FetchUserInfo(txtUserId.Text);
+            Content = Utility.PrettyJson(result.Content);
+            txtResponce.Text = Content;
             Members.Clear();
 
-            var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
-            
-
-           
+            var usr = JsonConvert.DeserializeObject<Users.Items>(txtResponce.Text);
             
         }
 
         private void savefile_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFile1 = new SaveFileDialog();
-            saveFile1.DefaultExt = "*.json";
-            saveFile1.Filter = "Test files|*.json";
-            if (saveFile1.ShowDialog() == true &&
-                saveFile1.FileName.Length > 0)
-            {
-                using (StreamWriter sw = new StreamWriter(saveFile1.FileName, true))
-                {
-                    sw.WriteLine(txtResponce.Text);
-                    sw.Close();
-                }
-            }
+
         }
     }
 }

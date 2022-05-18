@@ -6,9 +6,23 @@
       xmlns:local="clr-namespace:UIKitTutorials.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SoundsPage">
+      Title="SoundsPage"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <Label Content="Sounds" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <StackPanel>
+            <Expander
+    HorizontalAlignment="Stretch"
+    Header="Expander Example 1a">
+                <StackPanel
+      Orientation="Vertical"
+      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+      Margin="24,8,24,16">
+                    <TextBlock
+        Text="Your Content" />
+                    <TextBlock/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
     </Border>
 </Page>
