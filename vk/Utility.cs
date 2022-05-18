@@ -59,7 +59,7 @@ namespace UIKitTutorials.vk
             HttpResponseMessage response = await VKGet("groups.getMembers", new Dictionary<string, string>
             {
                 ["group_id"] = groupId,
-                ["fields"] = "title , exports",
+                ["fields"] = "title , exports , last_seen",
                 ["count"] = count,
                 ["lang"] = "ru"
                 //bdate - дата рождения

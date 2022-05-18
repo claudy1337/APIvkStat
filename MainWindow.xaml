@@ -98,7 +98,7 @@
                 </StackPanel>
                 <!-- End: Button Close | Restore | Minimize -->
                 
-                <Border Grid.Row="1" Margin="10">
+                <Border Grid.Row="1" Margin="0">
                     <Frame x:Name="PagesNavigation" NavigationUIVisibility="Hidden">
                         <!-- Page Content -->
                     </Frame>

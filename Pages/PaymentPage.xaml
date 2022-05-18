@@ -6,9 +6,52 @@
       xmlns:local="clr-namespace:UIKitTutorials.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PaymentPage">
+      Title="PaymentPage"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <Label Content="Payment" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
+                <TextBlock Text="USER INFORMATION JSON" 
+                           FontSize="22"
+                           FontFamily="Cascadia Code"/>
+
+                <TextBox   x:Name="txtUserId"
+                           Text="uqweed"
+                           FontSize="15"
+                           Margin="30"
+                           FontFamily="Cascadia Code"
+                           Style="{StaticResource MaterialDesignFilledTextBox}"
+                           VerticalAlignment="Top"
+                           TextWrapping="Wrap"
+                           MaxLength="25"
+                           material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           material:HintAssist.Hint="idUser"
+                           Cursor="Arrow"/>
+
+                <Button x:Name="GetUser"
+                        Click="GetUser_Click"
+                        Height="40"
+                        Content="SHOW"
+                        FontSize="20"
+                        FontFamily="Cascadia Code" Cursor="Hand"
+                        Background="#EB8F4C"
+                        Margin="30"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical">
+                <TextBox x:Name="txtResponce"
+                          Height="590"
+                          Grid.Row="0"
+                          AcceptsReturn="True" 
+                          TextWrapping="Wrap" 
+                          FontSize="15"
+                          FontFamily="Cascadia Code"
+                          Text="{Binding ElementName=this, Path=Content}" Cursor="Arrow"/>
+            </StackPanel>
+        </Grid>
     </Border>
 </Page>
