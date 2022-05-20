@@ -125,6 +125,7 @@
     <Compile Include="Model\Users.cs" />
     <Compile Include="vk\APIKEY.cs" />
     <Compile Include="vk\Auth.cs" />
+    <Compile Include="vk\MessageMember.cs" />
     <Compile Include="vk\Utility.cs" />
     <Compile Include="vk\VKDictResponce.cs" />
     <Compile Include="vk\VKGroupMember.cs" />

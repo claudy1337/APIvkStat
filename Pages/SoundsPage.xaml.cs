@@ -39,14 +39,28 @@ namespace UIKitTutorials.Pages
     /// </summary>
     public partial class SoundsPage : Page
     {
+        public String ResponceContents
+        {
+            get { return (String)GetValue(ResponceContentPropert); }
+            set { SetValue(ResponceContentPropert, value); }
+        }
+        public static readonly DependencyProperty ResponceContentPropert =
+            DependencyProperty.Register("ResponceContentVisible", typeof(String), typeof(MainWindow));
+        public ObservableCollection<MessageMember> Members { get; set; }
+            = new ObservableCollection<MessageMember>();
         public SoundsPage()
         {
             InitializeComponent();
         }
 
-        private void auth_Click(object sender, RoutedEventArgs e)
+        private async void messageGet_Click(object sender, RoutedEventArgs e)
         {
-            
+            ResponceContents = "....";
+            var result = await Utility.FetchMessageGet(APIKEY.USER_TOKEN, "all");
+            ResponceContents = Utility.PrettyJson(result.rawMessage);
+            txtResponce.Text = ResponceContents;
+            Members.Clear();
+            var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
         }
     }
 }

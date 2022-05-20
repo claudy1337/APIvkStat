@@ -51,6 +51,15 @@ namespace UIKitTutorials
                 dynamic json = JObject.Parse(responce);
                 APIKEY.USER_TOKEN = json.access_token;
                 APIKEY.USER_ID = json.user_id;
+                if (APIKEY.USER_TOKEN != null && APIKEY.USER_ID != null)
+                {
+                    MainWindow main = new MainWindow();
+                    main.Show();
+                }
+                else
+                {
+                    MessageBox.Show("error");
+                }
             }
             catch (Leaf.xNet.HttpException ex)
             {
