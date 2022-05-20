@@ -89,9 +89,18 @@
                                     <material:Card
                                         material:ShadowAssist.ShadowDepth="Depth3"
                                         material:ShadowAssist.ShadowEdges="Top"
-                                        Padding="32"
                                         Width="420"
-                                        Content="CUSTOM CLIP" />
+                                        Height="87">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="300"/>
+                                                <ColumnDefinition Width="150"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Name" Grid.Column="1" FontFamily="Cascadia Code" FontSize="15" Margin="10"/>
+                                            <TextBlock Text="13:13" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Cascadia Code" FontSize="15"/>
+                                            <TextBlock Grid.Column="0" Text="mefsdsffsfdfsfsfsfdsfsdfsfdfsffdfdfdfdf ffdf fdfdf fdfdssage" FontFamily="Cascadia Code" FontSize="20" TextWrapping="Wrap" Height="87"/>
+                                        </Grid>
+                                    </material:Card>
                                 </StackPanel>
                             </ListView>
                             
