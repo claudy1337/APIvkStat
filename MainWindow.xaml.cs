@@ -51,7 +51,7 @@ namespace UIKitTutorials
 
         private void rdSounds_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(new System.Uri("Pages/SoundsPage.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/test.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdNotes_Click(object sender, RoutedEventArgs e)

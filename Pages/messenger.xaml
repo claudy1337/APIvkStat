@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UIKitTutorials.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="800"
       Title="messenger" xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Border CornerRadius="5"  Background="{DynamicResource SecundaryBackgroundColor}">
@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="500"/>
             </Grid.ColumnDefinitions>
-            <material:Card material:ShadowAssist.ShadowDepth="Depth4">
+            
             <StackPanel Grid.Column="0" Width="300" Height="700" Orientation="Vertical">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -57,12 +57,12 @@
                     </ListView>
                 </Grid>
             </StackPanel>
-            </material:Card>
+          
             <StackPanel Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70"/>
-                        <RowDefinition Height="430"/>
+                        <RowDefinition Height="580"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
                         <Grid>
@@ -81,7 +81,7 @@
                     <StackPanel Grid.Row="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="345"/>
+                                <RowDefinition Height="500"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <ListView Grid.Row="0" Margin="15" Width="450">

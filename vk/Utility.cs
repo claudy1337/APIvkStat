@@ -24,7 +24,11 @@ namespace UIKitTutorials.vk
         public String Content { get; set; }
         public T responceUser { get; set; }
     }
-    
+    public class ResponceConversations<T>
+    {
+        public String prettyContent { get; set; }
+        public T responceConversations { get; set; }
+    }
     public class Utility
     {
         private static HttpClient client = new HttpClient();
@@ -103,6 +107,21 @@ namespace UIKitTutorials.vk
 
         }
 
-        
+        public static async Task<ResponceConversations<VKDictResponce<VKItemsResponse<MessageConversations>>>> FetchMessageConversations(String token)
+        {
+            HttpResponseMessage response = await VKGet("messages.getConversations", new Dictionary<string, string>
+            {
+                ["access_token"] = token
+                
+               
+            });
+            var content = await response.Content.ReadAsStringAsync();
+            var itemsResponce = JsonSerializer.Deserialize<VKDictResponce<VKItemsResponse<MessageConversations>>>(content);
+            return new ResponceConversations<VKDictResponce<VKItemsResponse<MessageConversations>>>
+            {
+                responceConversations = itemsResponce,
+                prettyContent = content
+            };
+        }
     }
 }
