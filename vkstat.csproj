@@ -123,9 +123,11 @@
       <DependentUpon>Auth.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Users.cs" />
+    <Compile Include="Pages\messenger.xaml.cs">
+      <DependentUpon>messenger.xaml</DependentUpon>
+    </Compile>
     <Compile Include="vk\APIKEY.cs" />
     <Compile Include="vk\Auth.cs" />
-    <Compile Include="vk\MessageMember.cs" />
     <Compile Include="vk\Utility.cs" />
     <Compile Include="vk\VKDictResponce.cs" />
     <Compile Include="vk\VKGroupMember.cs" />
@@ -163,7 +165,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SoundsPage.xaml">
+    <Page Include="Pages\messenger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,9 +187,6 @@
     </Compile>
     <Compile Include="Pages\JsonUser.xaml.cs">
       <DependentUpon>JsonUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SoundsPage.xaml.cs">
-      <DependentUpon>SoundsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
