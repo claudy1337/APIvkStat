@@ -17,9 +17,14 @@ namespace UIKitTutorials.Model
             public bool is_closed { get; set; }
             public string photo_100 { get; set; }
             public string owner_id { get; set; }
+            public string domain { get; set; }
+            public string sex { get; set; }
+            public string title { get; set; }
+            public string online { get; set; } 
+
             public override string ToString()
             {
-                return $"{first_name} {last_name} {id} {photo_100}";
+                return $"{first_name} {last_name} {id} {photo_100} {sex} {domain} {online} {is_closed} {id}";
             }
         }
         public class Response

@@ -39,7 +39,7 @@ namespace UIKitTutorials.Pages
         public HomePage()
         {
             InitializeComponent();
-
+            ResponceContent = null;
         }
         public String ResponceContent
         {
@@ -56,13 +56,34 @@ namespace UIKitTutorials.Pages
         private async void GetUser_Click(object sender, RoutedEventArgs e)
         {
             ResponceContent = "....";
-            var result = await Utility.FetchMembersInfo(txtUserId.Text, "100");
+            var result = await Utility.FetchMembersInfo(txtGroupId.Text, txtCount.Text);
             ResponceContent = Utility.PrettyJson(result.rawContent);
             txtResponce.Text = ResponceContent;
             Members.Clear();
+            
+            try
+            {
+                var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
+                usersGroup.Text = $"подписч:\n{usr.response.count.ToString()}";
+                usrList.ItemsSource = usr.response.items;
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
 
-            var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
-            usrList.ItemsSource = usr.response.items;
+        private void SaveUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void usrList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedUser = usrList.SelectedItem as Users.User;
+            MessageBox.Show(selectedUser.domain);
+            
         }
     }
 }

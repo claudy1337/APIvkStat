@@ -37,13 +37,14 @@ namespace UIKitTutorials.Pages
     /// </summary>
     public partial class NotesPage : Page
     {
-        public String ResponceContent
+       
+        public String ResponceContentVisible
         {
-            get { return (String)GetValue(ResponceContentProperty); }
-            set { SetValue(ResponceContentProperty, value); }
+            get { return (String)GetValue(ResponceContentPropertys); }
+            set { SetValue(ResponceContentPropertys, value); }
         }
-        public static readonly DependencyProperty ResponceContentProperty =
-            DependencyProperty.Register("ResponceContent", typeof(String), typeof(MainWindow));
+        public static readonly DependencyProperty ResponceContentPropertys =
+            DependencyProperty.Register("ResponceContentVisible", typeof(String), typeof(MainWindow));
 
         public ObservableCollection<VKGroupMember> Members { get; set; }
             = new ObservableCollection<VKGroupMember>();
@@ -54,10 +55,10 @@ namespace UIKitTutorials.Pages
 
         private async void getUser_Click(object sender, RoutedEventArgs e)
         {
-            ResponceContent = "....";
+            ResponceContentVisible = "....";
             var result = await Utility.FetchMembersInfo(txtGroupId.Text, txtCount.Text);
-            ResponceContent = Utility.PrettyJson(result.rawContent);
-            txtResponce.Text = ResponceContent;
+            ResponceContentVisible = Utility.PrettyJson(result.rawContent);
+            txtResponce.Text = ResponceContentVisible;
             Members.Clear();
             var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text); 
         }
@@ -77,5 +78,7 @@ namespace UIKitTutorials.Pages
                 }
             }
         }
+
     }
+    
 }

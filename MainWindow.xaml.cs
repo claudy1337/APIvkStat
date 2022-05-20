@@ -46,8 +46,6 @@ namespace UIKitTutorials
 
         private void rdHome_Click(object sender, RoutedEventArgs e)
         {
-           // PagesNavigation.Navigate(new HomePage());
-            
             PagesNavigation.Navigate(new System.Uri("Pages/MembersGroup.xaml", UriKind.RelativeOrAbsolute));
         }
 

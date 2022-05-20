@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,22 +30,32 @@ using System.Reflection;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using Leaf.xNet;
 
-
-namespace UIKitTutorials.Pages
+namespace UIKitTutorials
 {
     /// <summary>
-    /// Lógica de interacción para SoundsPage.xaml
+    /// Логика взаимодействия для Auth.xaml
     /// </summary>
-    public partial class SoundsPage : Page
+    public partial class Auth : Window
     {
-        public SoundsPage()
+        public Auth()
         {
             InitializeComponent();
         }
 
-        private void auth_Click(object sender, RoutedEventArgs e)
+        private void oauth_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                var current_user = new Leaf.xNet.HttpRequest();
+                string responce = current_user.Get("https://oauth.vk.com/token?grant_type=password&client_id=2274003&client_secret=hHbZxrka2uZ6jB1inYsH&username=" + txtLogin.Text + "&password=" + txtPassword.Text).ToString();
+                dynamic json = JObject.Parse(responce);
+                APIKEY.USER_TOKEN = json.access_token;
+                APIKEY.USER_ID = json.user_id;
+            }
+            catch (Leaf.xNet.HttpException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

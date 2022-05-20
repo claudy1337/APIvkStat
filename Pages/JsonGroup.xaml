@@ -104,7 +104,7 @@
                           TextWrapping="Wrap" 
                           FontSize="15"
                           FontFamily="Cascadia Code"
-                          Text="{Binding ElementName=this, Path=ResponceContent}" Cursor="Arrow"/>
+                          Text="{Binding ElementName=this, Path=ResponceContentVisible}" Cursor="Arrow"/>
             </StackPanel>
         </Grid>
     </Border>
