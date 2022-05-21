@@ -122,6 +122,7 @@
     <Compile Include="Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Users.cs" />
     <Compile Include="Pages\messenger.xaml.cs">
       <DependentUpon>messenger.xaml</DependentUpon>

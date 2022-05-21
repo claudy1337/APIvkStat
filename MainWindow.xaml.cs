@@ -51,7 +51,8 @@ namespace UIKitTutorials
 
         private void rdSounds_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(new System.Uri("Pages/test.xaml", UriKind.RelativeOrAbsolute));
+            
+            PagesNavigation.Navigate(new System.Uri("Pages/messenger.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdNotes_Click(object sender, RoutedEventArgs e)
@@ -62,6 +63,17 @@ namespace UIKitTutorials
         private void rdPayment_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(new System.Uri("Pages/JsonUser.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void rdJsonMessage_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(new System.Uri("Pages/test.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

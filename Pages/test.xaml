@@ -11,7 +11,7 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <Button x:Name="cl" Click="cl_Click"/>
-            <TextBox x:Name="txtResponce" Text="{Binding ElementName=this, Path=ResponceContentVisibles}" FontSize="24" Cursor="Arrow" Height="1000" Width="500"/>
+            <TextBox x:Name="txtResponce" Text="{Binding ElementName=this, Path=ResponceContentVisibles}" FontSize="24" Cursor="Arrow" Height="1000" Width="740"/>
         </StackPanel>
        
     </Grid>

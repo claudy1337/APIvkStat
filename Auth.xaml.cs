@@ -66,5 +66,11 @@ namespace UIKitTutorials
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
     }
 }

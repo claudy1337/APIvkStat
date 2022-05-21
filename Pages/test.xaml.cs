@@ -36,16 +36,7 @@ namespace UIKitTutorials.Pages
     /// </summary>
     public partial class test : Page
     {
-        public String ResponceContentVisibles
-        {
-            get { return (String)GetValue(ResponceContentPropertys); }
-            set { SetValue(ResponceContentPropertys, value); }
-        }
-        public static readonly DependencyProperty ResponceContentPropertys =
-            DependencyProperty.Register("ResponceContentVisibles", typeof(String), typeof(MainWindow));
-
-        public ObservableCollection<VKGroupMember> Members { get; set; }
-            = new ObservableCollection<VKGroupMember>();
+        
         public test()
         {
             InitializeComponent();
@@ -53,13 +44,7 @@ namespace UIKitTutorials.Pages
 
         private async void cl_Click(object sender, RoutedEventArgs e)
         {
-            String token = APIKEY.USER_TOKEN;
-            ResponceContentVisibles = "....";
-            var result = await Utility.FetchMessageConversations(APIKEY.USER_TOKEN);
-            ResponceContentVisibles = Utility.PrettyJson(result.prettyContent);
-            txtResponce.Text = ResponceContentVisibles;
-            Members.Clear();
-            var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
+            
         }
     }
 }

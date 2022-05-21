@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:UIKitTutorials"
         mc:Ignorable="d"
         Title="Auth" Height="450" Width="800"
-        xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Background="White" AllowsTransparency="True"
+        ResizeMode="NoResize" WindowState="Normal"
+        xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+        MouseDown="Window_MouseDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

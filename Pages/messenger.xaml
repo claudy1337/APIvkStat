@@ -5,17 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UIKitTutorials.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="messenger" xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Border CornerRadius="5"  Background="{DynamicResource SecundaryBackgroundColor}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="450"/>
             </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Column="0" Width="300" Height="700" Orientation="Vertical">
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5,0,5,-100">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -34,30 +34,37 @@
                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                            material:HintAssist.Hint="idGroup"
                            Cursor="Arrow" Width="150" />
-                        <Button Width="120" Background="#EB8F4C" FontFamily="Cascadia Code" Content="SEARCH"/>
+                        <Button Width="120" Background="#EB8F4C" FontFamily="Cascadia Code" Content="SEARCH" x:Name="BtnSearch" Click="BtnSearch_Click"/>
                     </StackPanel>
-                    <ListView Margin="15" Grid.Row="1">
-                        <material:Card
+                    <ListView Margin="10,15,20,15" Grid.Row="1" x:Name="lstvMessageType" Height="500">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+
+                                <material:Card
                     material:ShadowAssist.ShadowDepth="Depth5"
-                    Width="250"
+                    Width="275"
                     Height="100">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Image Source="/Assets/image/vk.png" Grid.Column="0"/>
-                                <TextBlock Text="12:12" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" FontFamily="Cascadia Code" Margin="10"/>
-                                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                                    <TextBlock Text="Name" Margin="10,0,0,0" FontFamily="Cascadia Code" FontSize="15" />
-                                    <TextBlock Text="Type" Margin="10,0,0,0" FontFamily="Cascadia Code" FontSize="15"/>
-                                </StackPanel>
-                            </Grid>
-                        </material:Card>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Assets/image/vk.png" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding last_message.date}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" FontFamily="Cascadia Code" Margin="10"/>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="0,10,0,0">
+                                            <TextBlock Text="{Binding conversation.peer.type}" Margin="10,15,0,0" FontFamily="Cascadia Code" FontSize="15" />
+                                            <TextBlock Text="{Binding last_message.text}" Margin="10,10,0,0" FontFamily="Cascadia Code" FontSize="15" TextWrapping="Wrap" Height="35"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </material:Card>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
+
                 </Grid>
             </StackPanel>
-          
+
             <StackPanel Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -81,7 +88,7 @@
                     <StackPanel Grid.Row="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="500"/>
+                                <RowDefinition Height="450"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <ListView Grid.Row="0" Margin="15" Width="450">
@@ -96,14 +103,13 @@
                                                 <ColumnDefinition Width="300"/>
                                                 <ColumnDefinition Width="150"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Name" Grid.Column="1" FontFamily="Cascadia Code" FontSize="15" Margin="10"/>
-                                            <TextBlock Text="13:13" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Cascadia Code" FontSize="15"/>
+                                            <TextBlock Text="13:13" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Cascadia Code" FontSize="15" />
                                             <TextBlock Grid.Column="0" Text="mefsdsffsfdfsfsfsfdsfsdfsfdfsffdfdfdfdf ffdf fdfdf fdfdssage" FontFamily="Cascadia Code" FontSize="20" TextWrapping="Wrap" Height="87"/>
                                         </Grid>
                                     </material:Card>
                                 </StackPanel>
                             </ListView>
-                            
+
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <TextBox 
                            x:Name="txtSend"
@@ -116,12 +122,13 @@
                            TextWrapping="Wrap"
                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                            material:HintAssist.Hint="idGroup"
-                           Cursor="Arrow" Width="330" />
+                           Cursor="Arrow" Width="285" />
                                 <Button Width="135" Background="#EB8F4C" FontFamily="Cascadia Code" Content="SEND"/>
+                                <TextBox Height="1" Width="1" x:Name="txtResponce" Text="{Binding ElementName=this, Path=ResponceContentVisibles}"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
-                    
+
                 </Grid>
             </StackPanel>
         </Grid>
