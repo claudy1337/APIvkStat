@@ -17,7 +17,6 @@ namespace UIKitTutorials.vk
     {
         public String rawContent { get; set; }
         public T responce { get; set; }
-
     }
     public class ResponceUser<T>
     {
@@ -29,6 +28,17 @@ namespace UIKitTutorials.vk
         public String prettyContent { get; set; }
         public T responceConversations { get; set; }
     }
+    public class ResponceMessage<T>
+    {
+        public String prettyMessage { get; set; }
+        public T responceMessage { get; set; }
+    }
+    public class ResponceChat<T>
+    {
+        public String ContentChat { get; set; }
+        public T responceChat { get; set; }
+    }
+
     public class Utility
     {
         private static HttpClient client = new HttpClient();
@@ -112,8 +122,6 @@ namespace UIKitTutorials.vk
             HttpResponseMessage response = await VKGet("messages.getConversations", new Dictionary<string, string>
             {
                 ["access_token"] = token
-                
-               
             });
             var content = await response.Content.ReadAsStringAsync();
             var itemsResponce = JsonSerializer.Deserialize<VKDictResponce<VKItemsResponse<MessageConversations>>>(content);
@@ -123,5 +131,39 @@ namespace UIKitTutorials.vk
                 prettyContent = content
             };
         }
+
+        public static async Task<ResponceChat<VKUserResponce<VKChatResponce>>> FetchGetChat(String access_token, String chat_id)
+        {
+            HttpResponseMessage response = await VKGet("messages.getChat", new Dictionary<string, string>
+            {
+                ["access_token"] = access_token,
+                ["chat_id"] = chat_id
+            });
+            var content = await response.Content.ReadAsStringAsync();
+            var itemsResponce = JsonSerializer.Deserialize<ResponceChat<VKUserResponce<VKChatResponce>>>(content);
+            return new ResponceChat<VKUserResponce<VKChatResponce>>
+            {
+                ContentChat = content
+            };
+
+        }
+        public static async Task<ResponceMessage<VKDictResponce<VKItemsResponse<VKMessageResponce>>>> FetchMessage(String access_token, String user_id)
+        {
+            HttpResponseMessage response = await VKGet("messages.getHistory", new Dictionary<string, string>
+            {
+                ["access_token"] = access_token,
+                ["user_id"] = user_id
+            });
+            var content = await response.Content.ReadAsStringAsync();
+            var itemsResponce = JsonSerializer.Deserialize<VKDictResponce<VKItemsResponse<VKMessageResponce>>>(content);
+            return new ResponceMessage<VKDictResponce<VKItemsResponse<VKMessageResponce>>>
+            {
+                responceMessage = itemsResponce,
+                prettyMessage = content
+            };
+        }
+
+
     }
 }
+

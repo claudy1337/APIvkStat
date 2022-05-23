@@ -36,7 +36,7 @@
                            Cursor="Arrow" Width="150" />
                         <Button Width="120" Background="#EB8F4C" FontFamily="Cascadia Code" Content="SEARCH" x:Name="BtnSearch" Click="BtnSearch_Click"/>
                     </StackPanel>
-                    <ListView Margin="10,15,20,15" Grid.Row="1" x:Name="lstvMessageType" Height="500">
+                    <ListView Margin="10,15,20,15" Grid.Row="1" x:Name="lstvMessageType" Height="500" SelectionChanged="lstvMessageType_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
 
@@ -91,23 +91,27 @@
                                 <RowDefinition Height="450"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <ListView Grid.Row="0" Margin="15" Width="450">
-                                <StackPanel>
-                                    <material:Card
+                            <ListView Grid.Row="0" Margin="15" Width="450" x:Name="msg">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <material:Card
                                         material:ShadowAssist.ShadowDepth="Depth3"
                                         material:ShadowAssist.ShadowEdges="Top"
                                         Width="420"
                                         Height="87">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="300"/>
-                                                <ColumnDefinition Width="150"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Text="13:13" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Cascadia Code" FontSize="15" />
-                                            <TextBlock Grid.Column="0" Text="mefsdsffsfdfsfsfsfdsfsdfsfdfsffdfdfdfdf ffdf fdfdf fdfdssage" FontFamily="Cascadia Code" FontSize="20" TextWrapping="Wrap" Height="87"/>
-                                        </Grid>
-                                    </material:Card>
-                                </StackPanel>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="300"/>
+                                                        <ColumnDefinition Width="150"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding date}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Cascadia Code" FontSize="15" />
+                                                    <TextBlock Grid.Column="0" Text="{Binding Path=text}" FontFamily="Cascadia Code" FontSize="20" TextWrapping="Wrap" Height="87"/>
+                                                </Grid>
+                                            </material:Card>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
                             </ListView>
 
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -125,6 +129,7 @@
                            Cursor="Arrow" Width="285" />
                                 <Button Width="135" Background="#EB8F4C" FontFamily="Cascadia Code" Content="SEND"/>
                                 <TextBox Height="1" Width="1" x:Name="txtResponce" Text="{Binding ElementName=this, Path=ResponceContentVisibles}"/>
+                                <TextBox Height="1" Width="1" x:Name="txtResponcemessage" Text="{Binding ElementName=this, Path=ResponceMessage}"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>

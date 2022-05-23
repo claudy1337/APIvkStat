@@ -41,11 +41,19 @@ namespace UIKitTutorials.Pages
             get { return (String)GetValue(ResponceContentPropertys); }
             set { SetValue(ResponceContentPropertys, value); }
         }
+        public String ResponceMessage
+        {
+            get { return (String)GetValue(ResponceContentMessage); }
+            set { SetValue(ResponceContentMessage, value); }
+        }
+        
         public static readonly DependencyProperty ResponceContentPropertys =
             DependencyProperty.Register("ResponceContentVisibles", typeof(String), typeof(MainWindow));
-
-        public ObservableCollection<VKGroupMember> Member { get; set; }
-            = new ObservableCollection<VKGroupMember>();
+        public static readonly DependencyProperty ResponceContentMessage =
+            DependencyProperty.Register("ResponceMessage", typeof(String), typeof(MainWindow));
+        public ObservableCollection<MessageConversations> Member { get; set; }
+            = new ObservableCollection<MessageConversations>();
+        String token = APIKEY.USER_TOKEN;
         public messenger()
         {
             InitializeComponent();
@@ -53,14 +61,59 @@ namespace UIKitTutorials.Pages
 
         private async void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            String token = APIKEY.USER_TOKEN;
+            
             ResponceContentVisibles = "....";
             var result = await Utility.FetchMessageConversations(APIKEY.USER_TOKEN);
+
             ResponceContentVisibles = Utility.PrettyJson(result.prettyContent);
+            
             txtResponce.Text = ResponceContentVisibles;
             Member.Clear();
-            var usr = JsonConvert.DeserializeObject<Message.Root>(txtResponce.Text);
-            lstvMessageType.ItemsSource = usr.response.items;
+            var dialog = JsonConvert.DeserializeObject<Message.Root>(txtResponce.Text);
+            var dialogs = JsonConvert.DeserializeObject<Message.Item>("");
+            
+            
+            foreach (var item in dialog.response.items)
+            {
+                //List<string> type = new List<string>() { item.conversation.peer.type };
+
+            }
+            lstvMessageType.ItemsSource = dialog.response.items;
+            
+
+        }
+
+        private async void lstvMessageType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = lstvMessageType.SelectedItem as Message;
+            ResponceContentVisibles = "....";
+            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
+
+            ResponceContentVisibles = Utility.PrettyJson(result.prettyMessage);
+
+            txtResponcemessage.Text = ResponceMessage;
+            Member.Clear();
+            try
+            {
+                var dialog = JsonConvert.DeserializeObject<Message>(txtResponce.Text);
+                
+                
+                msg.ItemsSource = dialog.ToString();
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            //var dialog = JsonConvert.DeserializeObject<VKMessageResponce>(txtResponce.Text);
+            //var dialogs = JsonConvert.DeserializeObject<VKMessageResponce.Item>("");
+
+
+           
+
+            
+
+            
+
         }
     }
 }

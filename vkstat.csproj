@@ -131,12 +131,13 @@
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
     <Compile Include="vk\APIKEY.cs" />
-    <Compile Include="vk\Auth.cs" />
     <Compile Include="vk\MessageConversations.cs" />
     <Compile Include="vk\Utility.cs" />
+    <Compile Include="vk\VKChatResponce.cs" />
     <Compile Include="vk\VKDictResponce.cs" />
     <Compile Include="vk\VKGroupMember.cs" />
     <Compile Include="vk\VKItemsResponse.cs" />
+    <Compile Include="vk\VKMessageResponce.cs" />
     <Compile Include="vk\VKUserResponce.cs" />
     <Page Include="Assets\Icons\Icons.xaml">
       <SubType>Designer</SubType>

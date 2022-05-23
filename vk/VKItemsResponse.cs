@@ -9,6 +9,6 @@ namespace UIKitTutorials.vk
     public class VKItemsResponse<T>
     {
         public int count { get; set; }
-        public List<T> items { get; set; }
+        public Array items { get; set; }
     }
 }

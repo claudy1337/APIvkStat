@@ -36,7 +36,16 @@ namespace UIKitTutorials.Pages
     /// </summary>
     public partial class test : Page
     {
-        
+        public String ResponceMessage
+        {
+            get { return (String)GetValue(ResponceContentMessage); }
+            set { SetValue(ResponceContentMessage, value); }
+        }
+        public static readonly DependencyProperty ResponceContentMessage =
+            DependencyProperty.Register("ResponceMessage", typeof(String), typeof(MainWindow));
+        public ObservableCollection<MessageConversations> Member { get; set; }
+            = new ObservableCollection<MessageConversations>();
+         String token = APIKEY.USER_TOKEN;
         public test()
         {
             InitializeComponent();
@@ -44,7 +53,15 @@ namespace UIKitTutorials.Pages
 
         private async void cl_Click(object sender, RoutedEventArgs e)
         {
-            
+           
+            ResponceMessage = "....";
+            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
+
+            ResponceMessage = Utility.PrettyJson(result.prettyMessage);
+
+            txtResponce.Text = ResponceMessage;
+            Member.Clear();
+           
         }
     }
 }

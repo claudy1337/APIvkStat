@@ -206,7 +206,7 @@ namespace UIKitTutorials.Model
 
             public override string ToString()
             {
-                return $"{conversation.peer.id} {conversation.peer.type} {conversation.peer.local_id} {last_message.date} {last_message.text}";
+                return $"{conversation.peer.id} {conversation.peer.type} {conversation.peer.local_id} {last_message.date} {last_message.text} {last_message.attachments}";
             }
         }
 
