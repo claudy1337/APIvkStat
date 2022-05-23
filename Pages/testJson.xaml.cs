@@ -43,8 +43,8 @@ namespace UIKitTutorials.Pages
         }
         public static readonly DependencyProperty ResponceContentMessage =
             DependencyProperty.Register("ResponceMessage", typeof(String), typeof(MainWindow));
-        public ObservableCollection<MessageConversations> Member { get; set; }
-            = new ObservableCollection<MessageConversations>();
+        public ObservableCollection<VKGroupMember> Member { get; set; }
+            = new ObservableCollection<VKGroupMember>();
          String token = APIKEY.USER_TOKEN;
         public test()
         {
@@ -53,15 +53,15 @@ namespace UIKitTutorials.Pages
 
         private async void cl_Click(object sender, RoutedEventArgs e)
         {
-           
-            ResponceMessage = "....";
-            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
 
-            ResponceMessage = Utility.PrettyJson(result.prettyMessage);
+            //ResponceMessage = "....";
+            //var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
 
-            txtResponce.Text = ResponceMessage;
-            Member.Clear();
-           
+            //ResponceMessage = Utility.PrettyJson(result.prettyMessage);
+
+            //txtResponce.Text = ResponceMessage;
+            //Member.Clear();
+            
         }
     }
 }

@@ -29,16 +29,18 @@ using Newtonsoft.Json;
 using System.Reflection;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
+
 namespace UIKitTutorials.Pages
 {
     /// <summary>
-    /// Lógica de interacción para PaymentPage.xaml
+    /// Логика взаимодействия для TestPage.xaml
     /// </summary>
-    public partial class PaymentPage : Page
+    public partial class TestPage : Page
     {
-        public PaymentPage()
+        public TestPage()
         {
             InitializeComponent();
+            Refersh();
         }
         public String Content
         {
@@ -48,21 +50,23 @@ namespace UIKitTutorials.Pages
         public static readonly DependencyProperty ResponceContentProperty =
             DependencyProperty.Register("Content", typeof(String), typeof(MainWindow));
 
-        public ObservableCollection<VKGroupMember> Members { get; set; }
-            = new ObservableCollection<VKGroupMember>();
-        private async void GetUser_Click(object sender, RoutedEventArgs e)
+        public ObservableCollection<VKClientInfo> Members { get; set; }
+            = new ObservableCollection<VKClientInfo>();
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+        }
+        public async void Refersh()
         {
             Content = "....";
-            var result = await Utility.FetchUserInfo(txtUserId.Text, APIKEY.USER_TOKEN);
+            var result = await Utility.FetchUserInfo(APIKEY.USER_ID, APIKEY.USER_TOKEN);
             Content = Utility.PrettyJson(result.Content);
             txtResponce.Text = Content;
             Members.Clear();
-            var usr = JsonConvert.DeserializeObject<Users.Items>(txtResponce.Text); 
-        }
-
-        private void savefile_Click(object sender, RoutedEventArgs e)
-        {
-
+            var usr = JsonConvert.DeserializeObject<VKClientInfo.Root>(txtResponce.Text);
+            usrList.ItemsSource = usr.response;
         }
     }
 }

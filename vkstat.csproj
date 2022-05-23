@@ -124,16 +124,23 @@
     </Compile>
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Users.cs" />
+    <Compile Include="Pages\Account.xaml.cs">
+      <DependentUpon>Account.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\messenger.xaml.cs">
       <DependentUpon>messenger.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\test.xaml.cs">
-      <DependentUpon>test.xaml</DependentUpon>
+    <Compile Include="Pages\testJson.xaml.cs">
+      <DependentUpon>testJson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="vk\APIKEY.cs" />
     <Compile Include="vk\MessageConversations.cs" />
     <Compile Include="vk\Utility.cs" />
     <Compile Include="vk\VKChatResponce.cs" />
+    <Compile Include="vk\VKClientInfo.cs" />
     <Compile Include="vk\VKDictResponce.cs" />
     <Compile Include="vk\VKGroupMember.cs" />
     <Compile Include="vk\VKItemsResponse.cs" />
@@ -159,6 +166,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Account.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MembersGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,7 +186,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\test.xaml">
+    <Page Include="Pages\testJson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -67,13 +67,19 @@ namespace UIKitTutorials
 
         private void rdJsonMessage_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(new System.Uri("Pages/test.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/Account.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
+
+        private void rdGetPage_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(new System.Uri("Pages/TestPage.xaml", UriKind.RelativeOrAbsolute));
+            
         }
     }
 }

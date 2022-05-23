@@ -94,27 +94,20 @@ namespace UIKitTutorials.vk
             };
         }
 
-        public static async Task<ResponceUser<VKUserResponce<VKGroupMember>>> FetchUserInfo(String userId)
+        public static async Task<ResponceUser<VKUserResponce<VKGroupMember>>> FetchUserInfo(String userId, String access_token)
         {
             HttpResponseMessage response = await VKGet("users.get", new Dictionary<string, string>
             {
+                ["access_token"] = access_token,
                 ["user_id"] = userId,
-                ["fields"] = "lists , is_no_index , followers_count , counters , can_be_invited_group , has_photo , wall_default , last_seen , bdate , domain , photo_100 , sex"
-                //is_no_index Индексируется ли профиль поисковыми сайтами
-                //followers_count подписчиков
-                //counters - Количество различных объектов у пользователя
-                //can_be_invited_group, 
-                //has_photo
-                //wall_default
+                ["fields"] = "lists , is_no_index , followers_count , counters , can_be_invited_group , has_photo , wall_default , last_seen , bdate , domain , photo_100 , sex, counters"
             });
             var content = await response.Content.ReadAsStringAsync();
             var itemsResponce = JsonSerializer.Deserialize<ResponceUser<VKUserResponce<VKGroupMember>>>(content);
             return new ResponceUser<VKUserResponce<VKGroupMember>>
             {
-
                 Content = content
             };
-
         }
 
         public static async Task<ResponceConversations<VKDictResponce<VKItemsResponse<MessageConversations>>>> FetchMessageConversations(String token)
@@ -131,7 +124,6 @@ namespace UIKitTutorials.vk
                 prettyContent = content
             };
         }
-
         public static async Task<ResponceChat<VKUserResponce<VKChatResponce>>> FetchGetChat(String access_token, String chat_id)
         {
             HttpResponseMessage response = await VKGet("messages.getChat", new Dictionary<string, string>
