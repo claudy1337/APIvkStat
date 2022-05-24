@@ -142,6 +142,7 @@
     <Compile Include="vk\VKChatResponce.cs" />
     <Compile Include="vk\VKClientInfo.cs" />
     <Compile Include="vk\VKDictResponce.cs" />
+    <Compile Include="vk\VKFriends.cs" />
     <Compile Include="vk\VKGroupMember.cs" />
     <Compile Include="vk\VKItemsResponse.cs" />
     <Compile Include="vk\VKMessageResponce.cs" />

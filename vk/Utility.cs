@@ -109,7 +109,20 @@ namespace UIKitTutorials.vk
                 Content = content
             };
         }
-
+        public static async Task<ResponceUser<VKUserResponce<VKGroupMember>>> FetchGetFriends(String access_token)
+        {
+            HttpResponseMessage response = await VKGet("friends.get", new Dictionary<string, string>
+            {
+                ["access_token"] = access_token,
+                ["fields"] = "last_seen , bdate , domain , photo_100 , sex , first_name , last_name , id"
+            });
+            var content = await response.Content.ReadAsStringAsync();
+            var itemsResponce = JsonSerializer.Deserialize<ResponceUser<VKUserResponce<VKGroupMember>>>(content);
+            return new ResponceUser<VKUserResponce<VKGroupMember>>
+            {
+                Content = content
+            };
+        }
         public static async Task<ResponceConversations<VKDictResponce<VKItemsResponse<MessageConversations>>>> FetchMessageConversations(String token)
         {
             HttpResponseMessage response = await VKGet("messages.getConversations", new Dictionary<string, string>

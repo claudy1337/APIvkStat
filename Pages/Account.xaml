@@ -11,129 +11,136 @@
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
         <StackPanel>
-            <ListView x:Name="usrList" Width="800" Height="500">
-                <!-- 
+            <ListView x:Name="usrList" Width="800" Height="375">
+
+                <!--
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                   -->     
-                  
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="350"/>
-                    <ColumnDefinition Width="400"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Margin="15">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="250"/>
-                            <RowDefinition Height="200"/>
-                        </Grid.RowDefinitions>
-                        <Image x:Name="usrPhoto" Source="{Binding photo_100}" Width="280" Height="250" Grid.Row="0"/>
-                        <ListView Grid.Row="1">
-                            <material:Card
+                -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="350"/>
+                                <ColumnDefinition Width="400"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="15">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="250"/>
+                                        <RowDefinition Height="200"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Image x:Name="usrPhoto" Source="{Binding photo_100}"   Width="280" Height="250" Grid.Row="0"/>
+                                    <ListView Grid.Row="1" x:Name="friendsList">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+
+
+                                                <material:Card
                             material:ShadowAssist.ShadowDepth="Depth5"
                             Height="95" Width="300">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="/Assets/image/vk.png" Grid.Column="0"/>
-                                    <TextBlock Text="Name" FontSize="24" 
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                        </Grid.ColumnDefinitions>
+                                                <Image Source="{Binding photo_100}" Width="150" Height="100" Grid.Column="0"/>
+                                                        <TextBlock Text="{Binding first_name}" FontSize="24" 
                                            FontFamily="Cascadia Code"
                                            HorizontalAlignment="Center" 
                                            VerticalAlignment="Center"
                                            Grid.Column="1"/>
+                                                    </Grid>
+                                                </material:Card>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
                                 </Grid>
-                            </material:Card>
-                        </ListView>
-                    </Grid>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="250"/>
-                            <RowDefinition Height="250"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="100"/>
-                                    <RowDefinition Height="150"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="{Binding first_name}" x:Name="first_name" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="Cascadia Code" FontSize="30" />
-                                    <TextBlock Text="{Binding last_name}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontFamily="Cascadia Code" FontSize="30" />
-                                    <TextBlock Text="{Binding last_seen}" HorizontalAlignment="Right" Margin="120,-35,0,0" VerticalAlignment="Center" FontFamily="Cascadia Code" FontSize="15" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="250"/>
+                                        <RowDefinition Height="250"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="100"/>
+                                                <RowDefinition Height="150"/>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                                <TextBlock Text="{Binding first_name}" x:Name="first_name" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="Cascadia Code" FontSize="30" />
+                                                <TextBlock Text="{Binding last_name}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontFamily="Cascadia Code" FontSize="30" />
+                                                <TextBlock Text="{Binding last_seen}" HorizontalAlignment="Right" Margin="120,-35,0,0" VerticalAlignment="Center" FontFamily="Cascadia Code" FontSize="15" />
 
-                                </StackPanel>
-                                <Button Grid.Row="0" Margin="310,35,8,9" Background="#EB8F4C" Content="Update" Click="updClick_Click" Cursor="Hand"/>
+                                            </StackPanel>
+                                            <Button Grid.Row="0" Margin="310,35,8,9" Background="#EB8F4C" Content="Update" Click="updClick_Click" Cursor="Hand"/>
 
-                                <material:Card
+                                            <material:Card
                                 Grid.Row="1"
                                 material:ShadowAssist.ShadowDepth="Depth5" Margin="20,20,-20,0">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
-                                            <TextBlock Text="14" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="Видео" FontFamily="Cascadia Code" FontSize="27" />
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="1" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
-                                            <TextBlock Text="14" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="Групп" FontFamily="Cascadia Code" FontSize="27" />
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="2" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding audios}" x:Name="audio" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="Аудио" FontFamily="Cascadia Code" FontSize="27" />
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
-                                            <TextBlock Text="14" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="Друзей" FontFamily="Cascadia Code" FontSize="27" />
-                                        </StackPanel>
-                                    </Grid>
-                                </material:Card>
-                            </Grid>
-                        </StackPanel>
-                        <ListView Grid.Row="1">
-                            <material:Card
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding counters.videos}" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="Видео" FontFamily="Cascadia Code" FontSize="27" />
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding counters.groups}" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="Групп" FontFamily="Cascadia Code" FontSize="27" />
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="2" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding counters.audios}" x:Name="audio" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="Аудио" FontFamily="Cascadia Code" FontSize="27" />
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding counters.friends}" FontFamily="Cascadia Code" FontSize="30" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="Друзей" FontFamily="Cascadia Code" FontSize="27" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </material:Card>
+                                        </Grid>
+                                    </StackPanel>
+                                    <ListView Grid.Row="1">
+                                        <material:Card
                             material:ShadowAssist.ShadowDepth="Depth5"
                             Height="95" Width="380">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="/Assets/image/vk.png" Grid.Column="0"/>
-                                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <TextBlock Text="Name" FontSize="30" 
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="/Assets/image/vk.png" Grid.Column="0"/>
+                                                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <TextBlock Text="Name" FontSize="30" 
                                            FontFamily="Cascadia Code"
                                            HorizontalAlignment="Center" 
                                            VerticalAlignment="Center"
                                            Grid.Column="1"/>
-                                        <TextBlock Text="id" FontSize="24" 
+                                                    <TextBlock Text="id" FontSize="24" 
                                            FontFamily="Cascadia Code"
                                            HorizontalAlignment="Center" 
                                            VerticalAlignment="Center"
                                            Grid.Column="1"/>
-                                    </StackPanel>
+                                                </StackPanel>
+                                            </Grid>
+                                        </material:Card>
+                                    </ListView>
                                 </Grid>
-                            </material:Card>
-                        </ListView>
-
-                    </Grid>
-                </StackPanel>
-            </Grid>
-                <!--
+                            </StackPanel>
+                        </Grid>
+                        <!-- 
                     </DataTemplate>
                 </ListView.ItemTemplate>
-               -->
+                        -->
             </ListView>
-            <TextBox Height="6" Grid.Row="0" Width="6" HorizontalAlignment="Right" VerticalAlignment="Bottom"  x:Name="txtResponce" Text="{Binding ElementName=this, Path=ContentClient}" Margin="0,0,-5,145" Grid.RowSpan="2"/>
+            <TextBox Height="6" Grid.Row="0" Width="6" HorizontalAlignment="Right" VerticalAlignment="Bottom"  x:Name="txtResponce" Text="{Binding ElementName=this, Path=Content}" Margin="0,0,-5,145" Grid.RowSpan="2"/>
+            <TextBox Height="6" Grid.Row="0" Width="6" HorizontalAlignment="Right" VerticalAlignment="Bottom"  x:Name="txtResponceFriends" Text="{Binding ElementName=this, Path=ContentFriends}" Grid.RowSpan="2"/>
         </StackPanel>
     </Border>
 </Page>

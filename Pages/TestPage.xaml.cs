@@ -40,6 +40,7 @@ namespace UIKitTutorials.Pages
         public TestPage()
         {
             InitializeComponent();
+            usrList.ItemsSource = null;
             Refersh();
         }
         public String Content
@@ -61,12 +62,12 @@ namespace UIKitTutorials.Pages
         public async void Refersh()
         {
             Content = "....";
-            var result = await Utility.FetchUserInfo(APIKEY.USER_ID, APIKEY.USER_TOKEN);
+            var result = await Utility.FetchGetFriends(APIKEY.USER_TOKEN);
             Content = Utility.PrettyJson(result.Content);
             txtResponce.Text = Content;
             Members.Clear();
-            var usr = JsonConvert.DeserializeObject<VKClientInfo.Root>(txtResponce.Text);
-            usrList.ItemsSource = usr.response;
+            var usr = JsonConvert.DeserializeObject<VKFriends.Root>(txtResponce.Text);
+            usrList.ItemsSource = usr.response.items;
         }
     }
 }

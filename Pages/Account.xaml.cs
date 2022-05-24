@@ -41,29 +41,48 @@ namespace UIKitTutorials.Pages
             InitializeComponent();
             Refersh();
         }
-        public String ContentClient
+        public String Content
         {
-            get { return (String)GetValue(ResponceContentClient); }
-            set { SetValue(ResponceContentClient, value); }
+            get { return (String)GetValue(ResponceContentProperty); }
+            set { SetValue(ResponceContentProperty, value); }
         }
-        public static readonly DependencyProperty ResponceContentClient =
-            DependencyProperty.Register("ContentClient", typeof(String), typeof(MainWindow));
+        public static readonly DependencyProperty ResponceContentProperty =
+            DependencyProperty.Register("Content", typeof(String), typeof(MainWindow));
 
         public ObservableCollection<VKClientInfo> Members { get; set; }
             = new ObservableCollection<VKClientInfo>();
+
+        public String ContentFriends
+        {
+            get { return (String)GetValue(ResponceContentFriends); }
+            set { SetValue(ResponceContentFriends, value); }
+        }
+        public static readonly DependencyProperty ResponceContentFriends =
+            DependencyProperty.Register("ContentFriends", typeof(String), typeof(MainWindow));
+
+        public ObservableCollection<VKFriends> MemberFriends { get; set; }
+            = new ObservableCollection<VKFriends>();
+
         private async void updClick_Click(object sender, RoutedEventArgs e)
         {
 
         }
         public async void Refersh()
         {
-            ContentClient = "....";
+            Content = "....";
+            ContentFriends = "....";
             var result = await Utility.FetchUserInfo(APIKEY.USER_ID, APIKEY.USER_TOKEN);
-            ContentClient = Utility.PrettyJson(result.Content);
-            txtResponce.Text = ContentClient;
+            var getresultFriends = await Utility.FetchGetFriends(APIKEY.USER_TOKEN);
+            Content = Utility.PrettyJson(result.Content);
+            ContentFriends = Utility.PrettyJson(getresultFriends.Content);
+            txtResponce.Text = Content;
+            txtResponceFriends.Text = ContentFriends;
             Members.Clear();
+            MemberFriends.Clear();
             var usr = JsonConvert.DeserializeObject<VKClientInfo.Root>(txtResponce.Text);
-            usrList.ItemsSource = usr.response;
+            var friends = JsonConvert.DeserializeObject<VKFriends.Root>(txtResponceFriends.Text);
+           // usrList.ItemsSource = usr.response;
+            friendsList.ItemsSource = friends.response.items;
         }
         private async void cl_Click(object sender, RoutedEventArgs e)
         {
