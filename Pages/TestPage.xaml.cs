@@ -40,34 +40,33 @@ namespace UIKitTutorials.Pages
         public TestPage()
         {
             InitializeComponent();
-            usrList.ItemsSource = null;
             Refersh();
         }
-        public String Content
+        public String ResponceMessage
         {
             get { return (String)GetValue(ResponceContentProperty); }
             set { SetValue(ResponceContentProperty, value); }
         }
         public static readonly DependencyProperty ResponceContentProperty =
-            DependencyProperty.Register("Content", typeof(String), typeof(MainWindow));
+            DependencyProperty.Register("ResponceMessage", typeof(String), typeof(MainWindow));
 
-        public ObservableCollection<VKClientInfo> Members { get; set; }
-            = new ObservableCollection<VKClientInfo>();
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-        }
+        public ObservableCollection<Message> Members { get; set; }
+            = new ObservableCollection<Message>();
         public async void Refersh()
         {
-            Content = "....";
-            var result = await Utility.FetchGetFriends(APIKEY.USER_TOKEN);
-            Content = Utility.PrettyJson(result.Content);
-            txtResponce.Text = Content;
+           
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ResponceMessage = "....";
+            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
+            ResponceMessage = Utility.PrettyJson(result.prettyMessage);
+            txtResponce.Text = ResponceMessage;
             Members.Clear();
-            var usr = JsonConvert.DeserializeObject<VKFriends.Root>(txtResponce.Text);
-            usrList.ItemsSource = usr.response.items;
+            var usr = JsonConvert.DeserializeObject<MessageGetTest.Root>(txtResponce.Text);
+            // usrList.ItemsSource = usr.response;
+            messList.ItemsSource = usr.response.items;
         }
     }
 }

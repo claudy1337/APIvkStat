@@ -10,21 +10,36 @@
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
         <Grid>
-            <Button Margin="525,234,0,234" Click="Button_Click"/>
-            <ListView Margin="0,0,300,170" x:Name="usrList">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Source="{Binding photo_100}"/>
-                            <TextBlock Text="{Binding first_name}"/>
-
-                        </StackPanel>
-
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <TextBox TextWrapping="Wrap" x:Name="txtResponce" Cursor="Arrow" Text="{Binding ElementName=this, Path=Content}" Margin="525,295,10,45"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+                <ListView HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="messList" Width="400" Height="400">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            
+                        
+                    <material:Card
+                        material:ShadowAssist.ShadowDepth="Depth5"
+                        Width="375">
+                        <TextBlock Text="{Binding text}" FontSize="23"/>
+                    </material:Card>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Click="Button_Click_1"/>
+            </StackPanel>
+            <TextBox x:Name="txtResponce"
+                        Grid.Column="1"
+                         IsReadOnly="True"
+                          Height="590"
+                          Grid.Row="0"
+                          AcceptsReturn="True" 
+                          TextWrapping="Wrap" 
+                          FontSize="15"
+                          FontFamily="Cascadia Code"
+                          Text="{Binding ElementName=this, Path=ResponceMessage}" Cursor="Arrow"/>
         </Grid>
     </Border>
 </Page>

@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Security;
 using System.IO;
 using System.Text.Json;
+using UIKitTutorials.Model;
 
 namespace UIKitTutorials.vk
 {
@@ -152,7 +153,7 @@ namespace UIKitTutorials.vk
             };
 
         }
-        public static async Task<ResponceMessage<VKDictResponce<VKItemsResponse<VKMessageResponce>>>> FetchMessage(String access_token, String user_id)
+        public static async Task<ResponceMessage<VKDictResponce<VKItemsResponse<MessageGetTest>>>> FetchMessage(String access_token, String user_id)
         {
             HttpResponseMessage response = await VKGet("messages.getHistory", new Dictionary<string, string>
             {
@@ -160,8 +161,8 @@ namespace UIKitTutorials.vk
                 ["user_id"] = user_id
             });
             var content = await response.Content.ReadAsStringAsync();
-            var itemsResponce = JsonSerializer.Deserialize<VKDictResponce<VKItemsResponse<VKMessageResponce>>>(content);
-            return new ResponceMessage<VKDictResponce<VKItemsResponse<VKMessageResponce>>>
+            var itemsResponce = JsonSerializer.Deserialize<VKDictResponce<VKItemsResponse<MessageGetTest>>>(content);
+            return new ResponceMessage<VKDictResponce<VKItemsResponse<MessageGetTest>>>
             {
                 responceMessage = itemsResponce,
                 prettyMessage = content
