@@ -60,7 +60,16 @@ namespace UIKitTutorials.Pages
             ResponceContentVisible = Utility.PrettyJson(result.rawContent);
             txtResponce.Text = ResponceContentVisible;
             Members.Clear();
-            var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text); 
+            var history = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
+            Model.RequestHistory request = new RequestHistory()
+            {
+                DateRequest = DateTime.Now,
+                TypeRequest = "groups.getMembers",
+                idUser = APIKEY.USER_ID,
+                LoginUser = APIKEY.login
+            };
+            BD_Connection.bd.RequestHistory.Add(request);
+            BD_Connection.bd.SaveChanges();
         }
 
         private void savefile_Click(object sender, RoutedEventArgs e)
@@ -77,6 +86,8 @@ namespace UIKitTutorials.Pages
                     sw.Close();
                 }
             }
+            
+           
         }
 
     }

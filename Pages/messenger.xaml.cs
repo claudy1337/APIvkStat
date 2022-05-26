@@ -28,6 +28,10 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using System.Reflection;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using VkNet;
+using VkNet.Model;
+using VkNet.Model.RequestParams;
+using VkNet.Enums.Filters;
 
 namespace UIKitTutorials.Pages
 {
@@ -49,71 +53,87 @@ namespace UIKitTutorials.Pages
         
         public static readonly DependencyProperty ResponceContentPropertys =
             DependencyProperty.Register("ResponceContentVisibles", typeof(String), typeof(MainWindow));
+
         public static readonly DependencyProperty ResponceContentMessage =
             DependencyProperty.Register("ResponceMessage", typeof(String), typeof(MainWindow));
         public ObservableCollection<MessageConversations> Member { get; set; }
             = new ObservableCollection<MessageConversations>();
-        String token = APIKEY.USER_TOKEN;
+
+        public ObservableCollection<MessageConversations> Members { get; set; }
+            = new ObservableCollection<MessageConversations>();
+
         public messenger()
         {
             InitializeComponent();
+            Refresh();
         }
 
         private async void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            
+            Refresh();
+        }
+        public async void Refresh()
+        {
             ResponceContentVisibles = "....";
             var result = await Utility.FetchMessageConversations(APIKEY.USER_TOKEN);
-
             ResponceContentVisibles = Utility.PrettyJson(result.prettyContent);
-            
             txtResponce.Text = ResponceContentVisibles;
             Member.Clear();
-            var dialog = JsonConvert.DeserializeObject<Message.Root>(txtResponce.Text);
-            var dialogs = JsonConvert.DeserializeObject<Message.Item>("");
-            
-            
-            foreach (var item in dialog.response.items)
-            {
-                //List<string> type = new List<string>() { item.conversation.peer.type };
-
-            }
+            var dialog = JsonConvert.DeserializeObject<Model.Message.Root>(txtResponce.Text);
+            var dialogs = JsonConvert.DeserializeObject<Model.Message.Item>("");
             lstvMessageType.ItemsSource = dialog.response.items;
-            
-
         }
-
+        int selected_chat;
         private async void lstvMessageType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = lstvMessageType.SelectedItem as Message;
-            ResponceContentVisibles = "....";
-            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
-
-            ResponceContentVisibles = Utility.PrettyJson(result.prettyMessage);
-
+            RefreshDialog();
+            
+        }
+        public async void RefreshDialog()
+        {
+            var selected = lstvMessageType.SelectedItem as Model.Message.Item;
+            selected_chat = selected.conversation.peer.local_id;
+            txtResponcemessage.Text = "....";
+            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, selected.ToString());
+            ResponceMessage = Utility.PrettyJson(result.prettyMessage);
             txtResponcemessage.Text = ResponceMessage;
-            Member.Clear();
+            Members.Clear();
+            var usr = JsonConvert.DeserializeObject<MessageGetTest.Root>(txtResponcemessage.Text);
+            var reverse = usr.response.items.ToArray().Reverse();
+            msg.ItemsSource = reverse;
+        }
+        private void msgSend_Click(object sender, RoutedEventArgs e)
+        {
             try
             {
-                var dialog = JsonConvert.DeserializeObject<Message>(txtResponce.Text);
-                
-                
-                msg.ItemsSource = dialog.ToString();
+                if (txtSend.Text == null)
+                {
+                    RefreshDialog();
+                }
+                VkApi api = new VkApi();
+                api.Authorize(new ApiAuthParams()
+                {
+                    AccessToken = APIKEY.USER_TOKEN,
+                    Password = APIKEY.password,
+                    Login = APIKEY.login,
+                    ApplicationId = 8165811,
+                    Settings = Settings.All
+                });
+
+
+                api.Messages.Send(new MessagesSendParams()
+                {
+                    UserId = selected_chat,
+                    PeerId = selected_chat,
+                    Message = txtSend.Text,
+                    RandomId = new Random().Next()
+                });
+                RefreshDialog();
             }
-            catch (System.NullReferenceException ex)
+            catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ограничена отправка");
             }
-            //var dialog = JsonConvert.DeserializeObject<VKMessageResponce>(txtResponce.Text);
-            //var dialogs = JsonConvert.DeserializeObject<VKMessageResponce.Item>("");
-
-
-           
-
-            
-
-            
-
         }
     }
 }

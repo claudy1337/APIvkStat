@@ -67,7 +67,7 @@ namespace UIKitTutorials
 
         private void rdJsonMessage_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(new System.Uri("Pages/Account.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/Accounts.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

@@ -106,7 +106,7 @@
                                                         <ColumnDefinition Width="150"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Text="{Binding date}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Cascadia Code" FontSize="15" />
-                                                    <TextBlock Grid.Column="0" Text="{Binding Path=text}" FontFamily="Cascadia Code" FontSize="20" TextWrapping="Wrap" Height="87"/>
+                                                    <TextBlock Grid.Column="0" Text="{Binding text}" FontFamily="Cascadia Code" FontSize="20" TextWrapping="Wrap" Height="87"/>
                                                 </Grid>
                                             </material:Card>
                                         </StackPanel>
@@ -125,11 +125,12 @@
                            Style="{StaticResource MaterialDesignFilledTextBox}"
                            TextWrapping="Wrap"
                            material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           material:HintAssist.Hint="idGroup"
+                           material:HintAssist.Hint="Message"
                            Cursor="Arrow" Width="285" />
-                                <Button Width="135" Background="#EB8F4C" FontFamily="Cascadia Code" Content="SEND"/>
+                                <Button Width="135" x:Name="msgSend" Click="msgSend_Click"  Background="#EB8F4C" FontFamily="Cascadia Code" Content="SEND"/>
                                 <TextBox Height="1" Width="1" x:Name="txtResponce" Text="{Binding ElementName=this, Path=ResponceContentVisibles}"/>
                                 <TextBox Height="1" Width="1" x:Name="txtResponcemessage" Text="{Binding ElementName=this, Path=ResponceMessage}"/>
+                                <TextBox Height="1" Width="1" x:Name="txtResponcemessageSend" Text="{Binding ElementName=this, Path=ResponceMessageSend}"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>

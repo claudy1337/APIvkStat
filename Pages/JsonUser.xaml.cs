@@ -57,7 +57,16 @@ namespace UIKitTutorials.Pages
             Content = Utility.PrettyJson(result.Content);
             txtResponce.Text = Content;
             Members.Clear();
-            var usr = JsonConvert.DeserializeObject<Users.Items>(txtResponce.Text); 
+            var usr = JsonConvert.DeserializeObject<Users.Items>(txtResponce.Text);
+            Model.RequestHistory request = new RequestHistory()
+            {
+                DateRequest = DateTime.Now,
+                TypeRequest = "users.get",
+                idUser = APIKEY.USER_ID,
+                LoginUser = APIKEY.login
+            };
+            BD_Connection.bd.RequestHistory.Add(request);
+            BD_Connection.bd.SaveChanges();
         }
 
         private void savefile_Click(object sender, RoutedEventArgs e)

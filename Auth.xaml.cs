@@ -28,6 +28,14 @@ using UIKitTutorials.Pages;
 using Microsoft.Win32;
 using System.Reflection;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using VkNet;
+using VkNet.Model;
+using VkNet.Model.RequestParams;
+using VkNet.Enums.Filters;
+using xNet;
+using Leaf.xNet.Services;
+using Leaf.xNet;
+
 
 namespace UIKitTutorials
 {
@@ -45,24 +53,39 @@ namespace UIKitTutorials
         {
             try
             {
-                var current_user = new Leaf.xNet.HttpRequest();
-                string responce = current_user.Get("https://oauth.vk.com/token?grant_type=password&client_id=2274003&client_secret=hHbZxrka2uZ6jB1inYsH&username=" + txtLogin.Text + "&password=" + txtPassword.Text).ToString();
-                dynamic json = JObject.Parse(responce);
-                APIKEY.USER_TOKEN = json.access_token;
-                APIKEY.USER_ID = json.user_id;
-                if (APIKEY.USER_TOKEN != null && APIKEY.USER_ID != null)
+                using (var avtoreg = new xNet.HttpRequest())
                 {
-                    MainWindow main = new MainWindow();
-                    main.Show();
-                }
-                else
-                {
-                    MessageBox.Show("error");
+                    string link = avtoreg.Get("https://oauth.vk.com/token?grant_type=password&client_id=2274003&client_secret=hHbZxrka2uZ6jB1inYsH&username=" + txtLogin.Text + "&password=" + txtPassword.Text).ToString(); //отправляем Get запрос 
+                    dynamic json = JObject.Parse(link);
+                    APIKEY.USER_TOKEN = json.access_token;
+                    APIKEY.USER_ID = json.user_id;
+                    APIKEY.USER_DOMAIN = json.domain;
+                    APIKEY.login = txtLogin.Text;
+                    APIKEY.password = txtPassword.Text;
+                    MessageBox.Show(APIKEY.ACCES_TOKEN, APIKEY.USER_ID);
+                    if (APIKEY.USER_TOKEN != null && APIKEY.USER_ID != null)
+                    {
+                        Model.RequestHistory request = new RequestHistory()
+                        {
+                            DateRequest = DateTime.Now,
+                            TypeRequest = "auth",
+                            idUser = APIKEY.USER_ID,
+                            LoginUser = APIKEY.login
+                        };
+                        BD_Connection.bd.RequestHistory.Add(request);
+                        BD_Connection.bd.SaveChanges();
+                        MainWindow main = new MainWindow();
+                        main.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("error");
+                    }
                 }
             }
-            catch (Leaf.xNet.HttpException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "пароль или лоигн введены не верно");
             }
         }
 

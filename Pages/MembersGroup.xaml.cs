@@ -36,11 +36,14 @@ namespace UIKitTutorials.Pages
     /// </summary>
     public partial class HomePage : Page
     {
+
         public HomePage()
         {
             InitializeComponent();
             ResponceContent = null;
+
         }
+        
         public String ResponceContent
         {
             get { return (String)GetValue(ResponceContentProperty); }
@@ -66,6 +69,15 @@ namespace UIKitTutorials.Pages
                 var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
                 usersGroup.Text = $"подписч:\n{usr.response.count.ToString()}";
                 usrList.ItemsSource = usr.response.items;
+                Model.RequestHistory request = new RequestHistory()
+                {
+                    DateRequest = DateTime.Now,
+                    TypeRequest = "groups.getMembers",
+                    idUser = APIKEY.USER_ID,
+                    LoginUser = APIKEY.login
+                };
+                BD_Connection.bd.RequestHistory.Add(request);
+                BD_Connection.bd.SaveChanges();
             }
             catch (System.NullReferenceException ex)
             {
@@ -76,7 +88,35 @@ namespace UIKitTutorials.Pages
 
         private void SaveUser_Click(object sender, RoutedEventArgs e)
         {
+            var usr = JsonConvert.DeserializeObject<Users.Root>(txtResponce.Text);
 
+            if (txtResponce.Text != null)
+            {
+                Model.RequestGroup group = new RequestGroup()
+                {
+                    DateRequest = DateTime.Now,
+                    LoginGroup = txtGroupId.Text,
+                    idGroup = txtGroupId.Text,
+                    MembersCount = usr.response.count,
+                    JsonFile = txtResponce.Text
+                };
+                BD_Connection.bd.RequestGroup.Add(group);
+                BD_Connection.bd.SaveChanges();
+                Model.RequestHistory request = new RequestHistory()
+                {
+                    DateRequest = DateTime.Now,
+                    TypeRequest = "save.groups.getMembers",
+                    idUser = APIKEY.USER_ID,
+                    LoginUser = APIKEY.login
+                };
+                BD_Connection.bd.RequestHistory.Add(request);
+                BD_Connection.bd.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("incorrect");
+            }
+            
         }
 
         private void usrList_SelectionChanged(object sender, SelectionChangedEventArgs e)

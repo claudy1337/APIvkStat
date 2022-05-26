@@ -67,9 +67,9 @@ namespace UIKitTutorials.Pages
            // txtResponceFriends.Text = ContentFriends;
             Members.Clear();
           //  MemberFriends.Clear();
-          //  var usr = JsonConvert.DeserializeObject<VKClientInfo.Root>(txtResponce.Text);
+               var usr = JsonConvert.DeserializeObject<VKClientInfo.Root>(txtResponce.Text);
           //  var friends = JsonConvert.DeserializeObject<VKFriends.Root>(txtResponceFriends.Text);
-          //  usrList.ItemsSource = usr.response;
+                usrList.ItemsSource = usr.response;
            // friendsList.ItemsSource = friends.response.items;
         }
     }
