@@ -13,10 +13,10 @@
         <StackPanel>
             <ListView x:Name="usrList" Width="800" Height="375">
 
-                <!--
+              
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                -->
+              
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="350"/>
@@ -74,7 +74,7 @@
                                                 <TextBlock Text="{Binding last_seen}" HorizontalAlignment="Right" Margin="120,-35,0,0" VerticalAlignment="Center" FontFamily="Cascadia Code" FontSize="15" />
 
                                             </StackPanel>
-                                            <Button Grid.Row="0" Margin="310,35,8,9" Background="#EB8F4C" Content="Update" Click="updClick_Click" Cursor="Hand"/>
+                                           
 
                                             <material:Card
                                 Grid.Row="1"
@@ -134,10 +134,10 @@
                                 </Grid>
                             </StackPanel>
                         </Grid>
-                        <!-- 
+                      
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                        -->
+                      
             </ListView>
             <TextBox Height="6" Grid.Row="0" Width="6" HorizontalAlignment="Right" VerticalAlignment="Bottom"  x:Name="txtResponce" Text="{Binding ElementName=this, Path=Content}" Margin="0,0,-5,145" Grid.RowSpan="2"/>
             <TextBox Height="6" Grid.Row="0" Width="6" HorizontalAlignment="Right" VerticalAlignment="Bottom"  x:Name="txtResponceFriends" Text="{Binding ElementName=this, Path=ContentFriends}" Grid.RowSpan="2"/>

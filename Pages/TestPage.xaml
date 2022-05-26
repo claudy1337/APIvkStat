@@ -19,12 +19,21 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             
-                        
-                    <material:Card
+                      
+                    
+                            <material:Card
                         material:ShadowAssist.ShadowDepth="Depth5"
                         Width="375">
-                        <TextBlock Text="{Binding text}" FontSize="23"/>
+                        <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding text}" FontSize="23"/>
+                                    <TextBlock Text="{Binding type}" FontSize="23"/>
+                                    <TextBlock Text="{Binding attachments.type}" FontSize="23"/>
+                                    <TextBlock x:Name="types" FontSize="23"/>
+                                    <Image Source="{Binding type}"/>
+                        </StackPanel>
+                        
                     </material:Card>
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

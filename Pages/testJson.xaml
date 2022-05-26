@@ -9,10 +9,7 @@
       Title="test" Background="White">
 
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <Button x:Name="cl" Click="cl_Click"/>
-            <TextBox x:Name="txtResponce" Text="{Binding ElementName=this, Path=ResponceContentMessage}" FontSize="24" Cursor="Arrow" Height="1000" Width="740"/>
-        </StackPanel>
+        
        
     </Grid>
 </Page>

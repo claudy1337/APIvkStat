@@ -128,6 +128,9 @@
     <Compile Include="Pages\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Accounts.xaml.cs">
+      <DependentUpon>Accounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\messenger.xaml.cs">
       <DependentUpon>messenger.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,7 @@
     </Compile>
     <Compile Include="vk\APIKEY.cs" />
     <Compile Include="vk\MessageConversations.cs" />
+    <Compile Include="vk\Responce.cs" />
     <Compile Include="vk\Utility.cs" />
     <Compile Include="vk\VKChatResponce.cs" />
     <Compile Include="vk\VKClientInfo.cs" />
@@ -169,6 +173,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Account.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Accounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

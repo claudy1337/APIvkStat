@@ -60,13 +60,18 @@ namespace UIKitTutorials.Pages
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
             ResponceMessage = "....";
-            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
+            var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "614977895");
             ResponceMessage = Utility.PrettyJson(result.prettyMessage);
             txtResponce.Text = ResponceMessage;
             Members.Clear();
             var usr = JsonConvert.DeserializeObject<MessageGetTest.Root>(txtResponce.Text);
-            // usrList.ItemsSource = usr.response;
-            messList.ItemsSource = usr.response.items;
+            
+            var reverse = usr.response.items.ToArray().Reverse();
+            
+            messList.ItemsSource = reverse;
+
+
+
         }
     }
 }

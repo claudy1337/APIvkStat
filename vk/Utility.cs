@@ -69,6 +69,9 @@ namespace UIKitTutorials.vk
             var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
             return JsonSerializer.Serialize(jsonElement, options);
         }
+
+       
+
         public static async Task<Responce<VKDictResponce<VKItemsResponse<VKGroupMember>>>> FetchMembersInfo(String groupId, string count)
         {
             HttpResponseMessage response = await VKGet("groups.getMembers", new Dictionary<string, string>
@@ -95,7 +98,7 @@ namespace UIKitTutorials.vk
             };
         }
 
-        public static async Task<ResponceUser<VKUserResponce<VKGroupMember>>> FetchUserInfo(String userId, String access_token)
+        public static async Task<ResponceUser<VKUserResponce<VKClientInfo>>> FetchUserInfo(String userId, String access_token)
         {
             HttpResponseMessage response = await VKGet("users.get", new Dictionary<string, string>
             {
@@ -104,8 +107,8 @@ namespace UIKitTutorials.vk
                 ["fields"] = "lists , is_no_index , followers_count , counters , can_be_invited_group , has_photo , wall_default , last_seen , bdate , domain , photo_100 , sex, counters"
             });
             var content = await response.Content.ReadAsStringAsync();
-            var itemsResponce = JsonSerializer.Deserialize<ResponceUser<VKUserResponce<VKGroupMember>>>(content);
-            return new ResponceUser<VKUserResponce<VKGroupMember>>
+            var itemsResponce = JsonSerializer.Deserialize<ResponceUser<VKUserResponce<VKClientInfo>>>(content);
+            return new ResponceUser<VKUserResponce<VKClientInfo>>
             {
                 Content = content
             };

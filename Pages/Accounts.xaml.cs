@@ -32,61 +32,45 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace UIKitTutorials.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Account.xaml
+    /// Логика взаимодействия для Accounts.xaml
     /// </summary>
-    public partial class Account : Page
+    public partial class Accounts : Page
     {
-        public Account()
+        public Accounts()
         {
             InitializeComponent();
             Refersh();
         }
-        public String Content
+        public String ContentAccount
         {
             get { return (String)GetValue(ResponceContentProperty); }
             set { SetValue(ResponceContentProperty, value); }
         }
         public static readonly DependencyProperty ResponceContentProperty =
-            DependencyProperty.Register("Content", typeof(String), typeof(MainWindow));
+            DependencyProperty.Register("ContentAccount", typeof(String), typeof(MainWindow));
 
         public ObservableCollection<VKClientInfo> Members { get; set; }
             = new ObservableCollection<VKClientInfo>();
 
-        public String ContentFriends
-        {
-            get { return (String)GetValue(ResponceContentFriends); }
-            set { SetValue(ResponceContentFriends, value); }
-        }
-        public static readonly DependencyProperty ResponceContentFriends =
-            DependencyProperty.Register("ContentFriends", typeof(String), typeof(MainWindow));
+       
 
-        public ObservableCollection<VKFriends> MemberFriends { get; set; }
-            = new ObservableCollection<VKFriends>();
-
-        private async void updClick_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+ 
         public async void Refersh()
         {
-            Content = "....";
-            ContentFriends = "....";
+            ContentAccount = "...";
+            //ContentFriends = "....";
             var result = await Utility.FetchUserInfo(APIKEY.USER_ID, APIKEY.USER_TOKEN);
             var getresultFriends = await Utility.FetchGetFriends(APIKEY.USER_TOKEN);
             Content = Utility.PrettyJson(result.Content);
-            ContentFriends = Utility.PrettyJson(getresultFriends.Content);
-            txtResponce.Text = Content;
-            txtResponceFriends.Text = ContentFriends;
+           // ContentFriends = Utility.PrettyJson(getresultFriends.Content);
+            txtResponce.Text = ContentAccount;
+           // txtResponceFriends.Text = ContentFriends;
             Members.Clear();
-            MemberFriends.Clear();
-            var usr = JsonConvert.DeserializeObject<VKClientInfo.Root>(txtResponce.Text);
-            var friends = JsonConvert.DeserializeObject<VKFriends.Root>(txtResponceFriends.Text);
-           // usrList.ItemsSource = usr.response;
-            //friendsList.ItemsSource = friends.response.items;
-        }
-        private async void cl_Click(object sender, RoutedEventArgs e)
-        {
-            
+          //  MemberFriends.Clear();
+          //  var usr = JsonConvert.DeserializeObject<VKClientInfo.Root>(txtResponce.Text);
+          //  var friends = JsonConvert.DeserializeObject<VKFriends.Root>(txtResponceFriends.Text);
+          //  usrList.ItemsSource = usr.response;
+           // friendsList.ItemsSource = friends.response.items;
         }
     }
 }
