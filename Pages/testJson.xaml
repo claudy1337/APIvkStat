@@ -9,7 +9,7 @@
       Title="test" Background="White">
 
     <Grid>
-        
-       
+        <Button Click="Button_Click"/>
+
     </Grid>
 </Page>

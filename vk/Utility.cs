@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
+
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net;
@@ -11,9 +11,12 @@ using System.Net.Security;
 using System.IO;
 using System.Text.Json;
 using UIKitTutorials.Model;
+using System.Web;
 
 namespace UIKitTutorials.vk
 {
+
+
     public class Responce<T>
     {
         public String rawContent { get; set; }
@@ -44,6 +47,7 @@ namespace UIKitTutorials.vk
     {
         private static HttpClient client = new HttpClient();
 
+       
         public static Task<HttpResponseMessage> VKGet(String method, Dictionary<String, String> param)
         {
             var builder = new UriBuilder($"https://api.vk.com/method/{method}");
@@ -59,6 +63,8 @@ namespace UIKitTutorials.vk
             return client.GetAsync(url);
 
         }
+       
+
         public static string PrettyJson(string unPrettyJson)
         {
             var options = new JsonSerializerOptions()
@@ -172,7 +178,10 @@ namespace UIKitTutorials.vk
             };
         }
 
-
+        internal void MessagesSend(string uSER_ID, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

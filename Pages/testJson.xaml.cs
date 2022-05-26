@@ -16,18 +16,13 @@ using UIKitTutorials.vk;
 using System.Collections;
 using System.Collections.ObjectModel;
 using UIKitTutorials.Model;
-using System.Web;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net;
-using System.Net.Security;
-using System.IO;
-using System.Text.Json;
-using UIKitTutorials.Pages;
-using Microsoft.Win32;
-using Newtonsoft.Json;
-using System.Reflection;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+using xNet;
+using Leaf.xNet.Services;
+using Leaf.xNet;
+using VkNet;
+using VkNet.Model;
+using VkNet.Model.RequestParams;
+using VkNet.Enums.Filters;
 
 namespace UIKitTutorials.Pages
 {
@@ -36,32 +31,31 @@ namespace UIKitTutorials.Pages
     /// </summary>
     public partial class test : Page
     {
-        public String ResponceMessage
-        {
-            get { return (String)GetValue(ResponceContentMessage); }
-            set { SetValue(ResponceContentMessage, value); }
-        }
-        public static readonly DependencyProperty ResponceContentMessage =
-            DependencyProperty.Register("ResponceMessage", typeof(String), typeof(MainWindow));
-        public ObservableCollection<VKGroupMember> Member { get; set; }
-            = new ObservableCollection<VKGroupMember>();
-         String token = APIKEY.USER_TOKEN;
+        
+        String token = APIKEY.USER_TOKEN;
         public test()
         {
             InitializeComponent();
         }
 
-        private async void cl_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
+            VkApi api = new VkApi();
+            api.Authorize(new ApiAuthParams()
+            {
+                AccessToken = APIKEY.USER_TOKEN,
+                ApplicationId = 8165811,
+                Settings = Settings.All
+            });
 
-            //ResponceMessage = "....";
-            //var result = await Utility.FetchMessage(APIKEY.USER_TOKEN, "118376632");
 
-            //ResponceMessage = Utility.PrettyJson(result.prettyMessage);
-
-            //txtResponce.Text = ResponceMessage;
-            //Member.Clear();
-            
+            api.Messages.Send(new MessagesSendParams()
+            {
+                UserId = 688844772,
+                PeerId = 688844772,
+                Message = "Test",
+                RandomId = new Random().Next()
+            });
         }
     }
 }

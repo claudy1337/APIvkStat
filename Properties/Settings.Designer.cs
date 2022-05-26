@@ -25,5 +25,7 @@ namespace UIKitTutorials.Properties
                 return defaultInstance;
             }
         }
+
+        public static VkNet.Enums.Filters.Settings All { get; internal set; }
     }
 }

@@ -8,7 +8,6 @@ namespace UIKitTutorials.Model
 {
     public class MessageGetTest
     {
-
         public class Ads
         {
             public string content_id { get; set; }

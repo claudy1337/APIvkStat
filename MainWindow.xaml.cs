@@ -78,7 +78,7 @@ namespace UIKitTutorials
 
         private void rdGetPage_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(new System.Uri("Pages/TestPage.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/testJson.xaml", UriKind.RelativeOrAbsolute));
             
         }
     }
